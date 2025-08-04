@@ -1,0 +1,41 @@
+module INSTRUCTION(
+	input[31:0] PCINPUT,
+	input clk,
+	input[10:0] counter,
+	output reg[31:0] instructionMEMREAD,
+	output reg[31:0] instructionPlus1);
+	
+
+	reg[31:0] instructionMEM [1023:0];
+	initial begin 
+//		instructionMEM[0] <=32'b00000000010000010001000000100000;
+//		instructionMEM[1] <=32'b00000000001000100001100000100000;
+//		instructionMEM[2] <=32'b00000000010000110000100000100000;
+//		instructionMEM[3] <=32'b00000000001000110001000000100000;
+//		instructionMEM[4] <=32'b00000000001000100001100000100000;
+//		instructionMEM[5] <=32'b00000000010000110000100000100000;
+//		instructionMEM[6] <=32'b00000000001000110001000000100000;
+//		instructionMEM[7] <=32'b00000000001000100001100000100000;
+//		instructionMEM[8] <=32'b00000000010000110000100000100000;
+//		instructionMEM[7]<=32'b11111111111111111111111111111111;
+
+		instructionMEM[0] = 32'b00000000000000010001000000100000;
+		instructionMEM[1] = 32'b00000000011000010001000000100000;
+		instructionMEM[2] = 32'b00000000001000100001100000100000;
+		instructionMEM[3] = 32'b00000000010000110000100000100000;
+		instructionMEM[4] = 32'b00000000000000000000000000000000;
+		instructionMEM[5] = 32'b00000000110001000010000000100000;
+		instructionMEM[6] = 32'b00010000100001010000000000001000;
+		instructionMEM[7] = 32'b00010000110001100000000000000001;
+		instructionMEM[8] = 32'b11111111111111111111111111111111;
+	end
+	always@(posedge clk)begin
+		if(counter <1056 && counter > 1024	)begin
+			instructionPlus1 <= instructionMEM[PCINPUT + 1];
+			instructionMEMREAD <= instructionMEM[PCINPUT];
+		end
+		
+		
+	end
+		
+endmodule
