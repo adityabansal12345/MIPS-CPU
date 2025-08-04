@@ -2,8 +2,8 @@ module registerFile(
 	input[4:0] reg1,
 	input clk,
 	input[4:0] reg2,
-	input[4:0] wb,
-	input[31:0] wbValue,
+	input[4:0] wbDestination,
+	input[31:0] WBDATA,
 	input regWrite,
 	input [10:0] counter,
 	output reg[31:0] regOut1,
@@ -20,10 +20,10 @@ module registerFile(
 		regFile[5] = 2'b10;
 	end
 	always@(posedge clk)begin
-			if(counter <1056 && counter > 1024)begin
-				if(regWrite)begin		
-					regFile[wb] <= wbValue;
-				end
+		if(counter <1056 && counter > 1024)begin
+			if(regWrite)begin		
+				regFile[wbDestination] <= WBDATA;
+			end
 		end
 	end
 
